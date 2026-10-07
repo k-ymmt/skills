@@ -4,7 +4,8 @@
 # Checks:
 #   1. Both marketplace manifests parse and list the same plugin set.
 #   2. Every plugin directory has both .claude-plugin/plugin.json and .codex-plugin/plugin.json.
-#   3. Every skill directory has SKILL.md whose frontmatter name matches the directory name.
+#   3. Every skill directory has SKILL.md whose frontmatter name matches the directory name,
+#      and skill names are unique across all plugins (they become /<skill> and $<skill>).
 #   4. `claude plugin validate --strict` passes for the marketplace and each plugin (when claude is installed).
 #   5. Codex can load the marketplace and list its plugins in an isolated CODEX_HOME (when codex is installed).
 set -euo pipefail
@@ -43,6 +44,10 @@ for dir in plugins/*/; do
     [ "$fm_name" = "$sname" ] || err "${skill}SKILL.md frontmatter name '$fm_name' != directory '$sname'"
   done
 done
+
+info "Checking that skill names are unique across plugins"
+dupes=$(for skill in plugins/*/skills/*/; do basename "$skill"; done | sort | uniq -d)
+[ -z "$dupes" ] || err "Duplicate skill names across plugins: $(echo "$dupes" | tr '\n' ' ')"
 
 if command -v claude >/dev/null; then
   info "Running claude plugin validate"

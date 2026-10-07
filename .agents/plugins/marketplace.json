@@ -5,28 +5,16 @@
   },
   "plugins": [
     {
-      "name": "ask-until-clear",
+      "name": "general",
       "source": {
         "source": "local",
-        "path": "./plugins/ask-until-clear"
+        "path": "./plugins/general"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_INSTALL"
       },
       "category": "Productivity"
-    },
-    {
-      "name": "codex-adversarial-review",
-      "source": {
-        "source": "local",
-        "path": "./plugins/codex-adversarial-review"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Code Quality"
     },
     {
       "name": "apple-platform-build",

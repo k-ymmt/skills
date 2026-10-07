@@ -1,0 +1,22 @@
+{
+  "name": "general",
+  "version": "0.2.0",
+  "description": "k-ymmt's general-purpose skills: ask-until-clear (carry out a task while asking about every unclear point) and codex-adversarial-review (adversarial second-opinion code review via OpenAI Codex). Every skill is user-invoked only.",
+  "author": {
+    "name": "k-ymmt"
+  },
+  "license": "MIT",
+  "keywords": ["questions", "clarification", "requirements", "code-review", "codex", "adversarial", "second-opinion"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "General",
+    "shortDescription": "k-ymmt's general-purpose skills",
+    "category": "Productivity",
+    "developerName": "k-ymmt",
+    "defaultPrompt": [
+      "$ask-until-clear add a dark mode toggle to the settings screen",
+      "$codex-adversarial-review",
+      "$codex-adversarial-review main"
+    ]
+  }
+}
