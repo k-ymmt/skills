@@ -31,6 +31,20 @@
         "adversarial",
         "second-opinion"
       ]
+    },
+    {
+      "name": "apple-platform-build",
+      "source": "./plugins/apple-platform-build",
+      "description": "Build, test, and inspect Apple platform projects through Xcode's MCP server (xcrun mcpbridge), with an xcodebuild fallback.",
+      "version": "0.1.0",
+      "category": "development",
+      "tags": [
+        "xcode",
+        "ios",
+        "macos",
+        "swift",
+        "mcp"
+      ]
     }
   ]
 }

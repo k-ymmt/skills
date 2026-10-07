@@ -10,6 +10,7 @@ Personal agent skills packaged as plugins for both Claude Code and OpenAI Codex.
 plugins/<name>/
   .claude-plugin/plugin.json      Claude Code plugin manifest
   .codex-plugin/plugin.json       Codex plugin manifest
+  .mcp.json                       Optional MCP servers (same file for both tools; see apple-platform-build)
   skills/<name>/
     SKILL.md                      Shared skill body (read by both tools)
     agents/openai.yaml            Codex-only UI metadata and invocation policy

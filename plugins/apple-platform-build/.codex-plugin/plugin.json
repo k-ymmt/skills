@@ -1,0 +1,23 @@
+{
+  "name": "apple-platform-build",
+  "version": "0.1.0",
+  "description": "Build, test, and inspect iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running.",
+  "author": {
+    "name": "k-ymmt"
+  },
+  "license": "MIT",
+  "keywords": ["xcode", "ios", "macos", "swift", "xcodebuild", "mcp", "apple"],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Apple Platform Build",
+    "shortDescription": "Build and test Apple projects via Xcode MCP",
+    "category": "Developer Tools",
+    "developerName": "k-ymmt",
+    "capabilities": ["Read", "Write"],
+    "defaultPrompt": [
+      "Build the current Xcode project and fix any errors",
+      "Run the unit tests for this app and report failures"
+    ]
+  }
+}

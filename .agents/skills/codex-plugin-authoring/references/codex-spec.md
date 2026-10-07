@@ -70,6 +70,8 @@ Real example (`plugins/remotion/.codex-plugin/plugin.json` in openai/plugins, tr
 
 Other documented top-level keys: `mcpServers` (`"./.mcp.json"`), `apps` (`"./.app.json"`). Everything under `interface` is optional and only affects the plugin browser UI.
 
+`.mcp.json` uses the same shape as Claude Code's, so one file serves both tools. Verified with codex-cli 0.159.2: a stdio entry `{"mcpServers": {"xcode": {"command": "xcrun", "args": ["mcpbridge"]}}}` appears in `codex mcp list` as enabled right after `codex plugin add` (this repository's `apple-platform-build` plugin). Remote servers use `"type": "http"`, `url`, and optionally `oauth_resource` (see `linear`, `figma` in openai/plugins).
+
 ## 3. `.agents/plugins/marketplace.json`
 
 Lives at the repository root (`$REPO_ROOT/.agents/plugins/marketplace.json`) or per user (`~/.agents/plugins/marketplace.json`). Example copied from openai/plugins:
