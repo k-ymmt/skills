@@ -7,6 +7,7 @@ Personal agent skills, packaged so that each one installs as a plugin in either 
 | Plugin | Invoke | What it does |
 | --- | --- | --- |
 | `ask-until-clear` | `/ask-until-clear <task>` (Claude Code) / `$ask-until-clear <task>` (Codex) | Carries out the task, but asks you about every unclear or ambiguous point first and keeps asking until nothing is left to guess. Only you can start it; the model never selects it on its own. |
+| `codex-adversarial-review` | `/codex-adversarial-review [ref\|range\|commit\|focus]` (Claude Code) / `$codex-adversarial-review ...` (Codex) | Runs an adversarial review of your changes in a fresh read-only `codex exec` session, then verifies every finding against the code before reporting. Requires the Codex CLI, logged in. Only you can start it. |
 
 ## Install
 
@@ -15,6 +16,7 @@ Personal agent skills, packaged so that each one installs as a plugin in either 
 ```bash
 claude plugin marketplace add k-ymmt/skills
 claude plugin install ask-until-clear@k-ymmt-skills
+claude plugin install codex-adversarial-review@k-ymmt-skills
 ```
 
 Or from inside a session: `/plugin marketplace add k-ymmt/skills`, then `/plugin install ask-until-clear@k-ymmt-skills`.
@@ -24,6 +26,7 @@ Or from inside a session: `/plugin marketplace add k-ymmt/skills`, then `/plugin
 ```bash
 codex plugin marketplace add k-ymmt/skills
 codex plugin add ask-until-clear@k-ymmt-skills
+codex plugin add codex-adversarial-review@k-ymmt-skills
 ```
 
 Or from inside a session: `/plugin marketplace add k-ymmt/skills`, then install it from `/plugins`.

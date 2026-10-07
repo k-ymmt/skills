@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["summary", "reviewed", "findings"],
+  "properties": {
+    "summary": {
+      "type": "string",
+      "description": "Two or three sentences: what the change does and the overall risk picture."
+    },
+    "reviewed": {
+      "type": "array",
+      "description": "What was actually examined: files read, callers traced, commands run. Lets the caller see what was NOT covered.",
+      "items": { "type": "string" }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "category", "file", "line", "title", "claim", "failure_scenario", "evidence", "confidence"],
+        "properties": {
+          "severity": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "category": { "type": "string", "description": "Short kebab-case slug, e.g. logic, security, concurrency, error-handling, data-loss, api-contract, missed-requirement, test-gap, performance." },
+          "file": { "type": "string", "description": "Repository-relative path." },
+          "line": { "type": ["integer", "null"], "description": "1-based line in the post-change file, or null if not line-specific." },
+          "title": { "type": "string", "description": "One line, under 80 characters." },
+          "claim": { "type": "string", "description": "The defect, stated as a falsifiable assertion about the code." },
+          "failure_scenario": { "type": "string", "description": "Concrete input or state, then the wrong behavior it produces." },
+          "evidence": { "type": "string", "description": "The code you read that supports the claim, quoted or paraphrased with locations." },
+          "confidence": { "type": "number", "description": "0 to 1. How sure you are the defect is real, not how severe it is." }
+        }
+      }
+    }
+  }
+}
