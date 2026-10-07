@@ -14,7 +14,13 @@ plugins/<name>/
     SKILL.md                      Shared skill body (read by both tools)
     agents/openai.yaml            Codex-only UI metadata and invocation policy
 scripts/validate.sh               Validation for the whole repository
+.agents/skills/<name>/            Project-scoped skills for this repo (Codex reads this path)
+.claude/skills/<name>             Symlink to the same directory so Claude Code sees it too
 ```
+
+## Project skills
+
+- `codex-plugin-authoring`: verified facts about how Codex loads plugins and skills, manifest examples, and how to re-check the latest spec. Load it before adding or changing a Codex plugin here. Keep it current: when a re-check changes a fact, update its `references/codex-spec.md` and the version line in its SKILL.md.
 
 ## Rules
 
