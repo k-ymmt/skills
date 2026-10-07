@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+"""xmcp: call Xcode MCP (xcrun mcpbridge) tools from a shell.
+  xmcp serve               start a daemon holding one mcpbridge session (background)
+  xmcp call TOOL [JSON]    call a tool, print text result
+  xmcp tools               list tool names
+  xmcp stop
+The daemon keeps one MCP session so session keys (DeviceInteraction*) persist across calls."""
+import json, os, socket, subprocess, sys, threading, time
+SOCK = os.environ.get("XMCP_SOCK", "/tmp/xmcp.sock")
+
+def serve():
+    if os.path.exists(SOCK): os.unlink(SOCK)
+    p = subprocess.Popen(["xcrun", "mcpbridge"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, bufsize=1)
+    wlock = threading.Lock(); nid = [0]; waiters = {}
+    def reader():
+        for line in p.stdout:
+            try: d = json.loads(line)
+            except Exception: continue
+            w = waiters.pop(d.get("id"), None)
+            if w: w[1].append(d); w[0].set()
+    threading.Thread(target=reader, daemon=True).start()
+    def rpc(method, params, notify=False):
+        msg = {"jsonrpc": "2.0", "method": method, "params": params}
+        with wlock:
+            if not notify:
+                nid[0] += 1; msg["id"] = nid[0]
+                ev = threading.Event(); box = []; waiters[msg["id"]] = (ev, box)
+            p.stdin.write(json.dumps(msg) + "\n"); p.stdin.flush()
+        if notify: return None
+        ev.wait(); return box[0]
+    rpc("initialize", {"protocolVersion": "2025-06-18", "capabilities": {}, "clientInfo": {"name": "xmcp", "version": "0"}})
+    rpc("notifications/initialized", {}, notify=True)
+    s = socket.socket(socket.AF_UNIX); s.bind(SOCK); s.listen(16)
+    def handle(c):
+        data = b""
+        while not data.endswith(b"\n"):
+            chunk = c.recv(65536)
+            if not chunk: break
+            data += chunk
+        req = json.loads(data)
+        if req.get("stop"):
+            c.sendall(b'{"ok":true}\n'); c.close(); p.kill(); os.unlink(SOCK); os._exit(0)
+        try:
+            if req.get("list"): d = rpc("tools/list", {})
+            else: d = rpc("tools/call", {"name": req["tool"], "arguments": req.get("args", {})})
+        except Exception as e:
+            d = {"error": str(e)}
+        c.sendall((json.dumps(d) + "\n").encode()); c.close()
+    while True:
+        c, _ = s.accept()
+        threading.Thread(target=handle, args=(c,), daemon=True).start()
+
+def send(req):
+    c = socket.socket(socket.AF_UNIX); c.connect(SOCK)
+    c.sendall((json.dumps(req) + "\n").encode())
+    data = b""
+    while True:
+        chunk = c.recv(1 << 20)
+        if not chunk: break
+        data += chunk
+    return json.loads(data)
+
+def main():
+    a = sys.argv[1:]
+    if not a: print(__doc__); return
+    if a[0] == "serve":
+        if os.fork() == 0:
+            os.setsid(); sys.stdout = open(os.devnull, "w"); serve(); return
+        for _ in range(100):
+            if os.path.exists(SOCK): print("xmcp: ready"); return
+            time.sleep(0.1)
+        print("xmcp: failed to start"); sys.exit(3)
+    if not os.path.exists(SOCK):
+        print("xmcp: not running; run `xmcp serve` first", file=sys.stderr); sys.exit(3)
+    if a[0] == "stop": send({"stop": True}); return
+    if a[0] == "tools":
+        d = send({"list": True}); [print(t["name"]) for t in d["result"]["tools"]]; return
+    if a[0] == "call":
+        args = json.loads(a[2]) if len(a) > 2 else {}
+        d = send({"tool": a[1], "args": args})
+        if "error" in d: print(json.dumps(d["error"])); sys.exit(1)
+        r = d["result"]
+        for item in r.get("content", []):
+            if item.get("type") == "text": print(item["text"])
+            else: print(f"[{item.get('type')} content omitted]")
+        if r.get("structuredContent") and not r.get("content"): print(json.dumps(r["structuredContent"], indent=1))
+        sys.exit(1 if r.get("isError") else 0)
+main()

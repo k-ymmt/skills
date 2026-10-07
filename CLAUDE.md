@@ -17,6 +17,7 @@ plugins/<plugin>/
 scripts/validate.sh               Validation for the whole repository
 .agents/skills/<name>/            Project-scoped skills for this repo (Codex reads this path)
 .claude/skills/<name>             Symlink to the same directory so Claude Code sees it too
+tests/<skill>/                    How a skill was tested end to end, and helpers to repeat it
 ```
 
 ## Project skills
@@ -36,4 +37,5 @@ scripts/validate.sh               Validation for the whole repository
 
 - Run `scripts/validate.sh` before committing. It checks manifest consistency, runs `claude plugin validate --strict`, and loads the marketplace into an isolated Codex home.
 - Test a plugin in Claude Code without installing: `claude --plugin-dir ./plugins/<name>`.
+- Re-test `simulator-verify` with sample apps and subagents as described in `tests/simulator-verify/README.md`.
 - Commit at the end of every work session with the original task context in the message.
