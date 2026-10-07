@@ -26,7 +26,7 @@ If the line above still reads `$ARGUMENTS` literally, the task is the text the u
 
 1. **Set up once per simulator boot.** `apvt status` says whether each booted simulator is set up and which running apps carry the agent. If it is not set up, run `apvt setup` (the first run builds the agent for the simulator; a few seconds). The setup lasts until the simulator shuts down.
 2. **Launch so the agent loads.** Xcode's launch replaces the environment variable that `apvt setup` puts into launchd, so an app started by Xcode's Run, `RunProject`, or `DeviceInteractionInstallAndRun` answers nothing unless you hand that launch the agent yourself:
-   - With the Xcode MCP server: `apvt launch-env --device <udid>` prints the variables as JSON; add `"$(inherited)": ""` and pass them as `environmentVariables` of `DeviceInteractionInstallAndRun`. The app keeps Xcode's console (`GetConsoleOutput`). The `simulator-verify` skill builds on this.
+   - With the Xcode MCP server: `apvt launch-env --xcode --device <udid>` prints the variables as JSON with `"$(inherited)": ""`; pass them as `environmentVariables` of `DeviceInteractionInstallAndRun`. The app keeps Xcode's console (`GetConsoleOutput`). The `simulator-verify` skill builds on this.
    - Otherwise build (`BuildProject` or `xcodebuild`), make sure the build is installed (Xcode's Run installs it; a bare build needs `xcrun simctl install booted <path/to/App.app>`), and start it from the command line:
 
      ```bash

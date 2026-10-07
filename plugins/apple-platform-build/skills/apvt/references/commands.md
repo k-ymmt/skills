@@ -16,7 +16,7 @@ Condensed from `apvt --help`, `apvt <command> --help`, and the README of https:/
 | `apvt screenshot <file.png>` | PNG with issues outlined and labelled `@N` (red: error, orange: warning, dashed: the other nodes an issue involves). |
 | `apvt rules` | What `inspect` checks and how to fix each. |
 | `apvt type <text> [--replace] [--submit]` | Inserts text into the text input that has keyboard focus, through `UIKeyInput` as the keyboard does (SwiftUI bindings and delegates see it). `--replace` clears the field first, `--submit` presses Return. Prints the field and its value. Tap the field first. Takes `--device`, `--app`, `--wait`, `--json`. |
-| `apvt launch-env [--device D] [--shell]` | Prints, as JSON (or `KEY=value` lines with `--shell`), the environment that makes an app launched by Xcode load the agent: pass it as `environmentVariables` of Xcode MCP's `DeviceInteractionInstallAndRun` with `"$(inherited)": ""`, or put it in the scheme's Run environment. Builds the agent if needed; leaves launchd alone. |
+| `apvt launch-env [--device D] [--xcode] [--shell]` | Prints, as JSON (or `KEY=value` lines with `--shell`), the environment that makes an app launched by Xcode load the agent: pass it as `environmentVariables` of Xcode MCP's `DeviceInteractionInstallAndRun` (`--xcode` adds `"$(inherited)": ""`), or put it in the scheme's Run environment. Builds the agent if needed; leaves launchd alone. |
 | `apvt debug swiftui-raw <file.json>` / `apvt debug methods <Class>` | Diagnostics for apvt itself; not needed for layout work. |
 
 ## Options shared by inspect, tree, query, assert, screenshot
