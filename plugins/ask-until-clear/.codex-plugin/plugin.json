@@ -1,0 +1,20 @@
+{
+  "name": "ask-until-clear",
+  "version": "0.1.0",
+  "description": "Carry out a task while repeatedly asking the user about every unclear or ambiguous point. User-invoked only.",
+  "author": {
+    "name": "k-ymmt"
+  },
+  "license": "MIT",
+  "keywords": ["questions", "clarification", "requirements", "interview"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ask Until Clear",
+    "shortDescription": "Do the task, asking until nothing is unclear",
+    "category": "Productivity",
+    "developerName": "k-ymmt",
+    "defaultPrompt": [
+      "$ask-until-clear add a dark mode toggle to the settings screen"
+    ]
+  }
+}

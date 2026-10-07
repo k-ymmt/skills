@@ -1,0 +1,6 @@
+interface:
+  display_name: "Ask Until Clear"
+  short_description: "Do the task, asking until nothing is unclear"
+  default_prompt: "Use $ask-until-clear to carry out this task, asking me about every unclear point first."
+policy:
+  allow_implicit_invocation: false

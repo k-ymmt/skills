@@ -1,0 +1,20 @@
+{
+  "name": "k-ymmt-skills",
+  "interface": {
+    "displayName": "k-ymmt skills"
+  },
+  "plugins": [
+    {
+      "name": "ask-until-clear",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ask-until-clear"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

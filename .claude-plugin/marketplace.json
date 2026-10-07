@@ -1,0 +1,19 @@
+{
+  "name": "k-ymmt-skills",
+  "owner": {
+    "name": "k-ymmt"
+  },
+  "metadata": {
+    "description": "Personal skills packaged as plugins for Claude Code and Codex."
+  },
+  "plugins": [
+    {
+      "name": "ask-until-clear",
+      "source": "./plugins/ask-until-clear",
+      "description": "Carry out a task while repeatedly asking the user about every unclear or ambiguous point. User-invoked only.",
+      "version": "0.1.0",
+      "category": "workflow",
+      "tags": ["questions", "clarification", "requirements"]
+    }
+  ]
+}
