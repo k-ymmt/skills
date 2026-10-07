@@ -25,15 +25,18 @@
     {
       "name": "apple-platform-build",
       "source": "./plugins/apple-platform-build",
-      "description": "Build, test, and inspect Apple platform projects through Xcode's MCP server (xcrun mcpbridge), with an xcodebuild fallback.",
-      "version": "0.1.0",
+      "description": "Build, test, and inspect Apple platform projects through Xcode's MCP server (xcrun mcpbridge), with an xcodebuild fallback, plus apvt for finding layout mistakes in an iOS Simulator app.",
+      "version": "0.2.0",
       "category": "development",
       "tags": [
         "xcode",
         "ios",
         "macos",
         "swift",
-        "mcp"
+        "mcp",
+        "apvt",
+        "layout",
+        "simulator"
       ]
     }
   ]

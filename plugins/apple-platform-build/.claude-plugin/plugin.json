@@ -1,13 +1,24 @@
 {
   "name": "apple-platform-build",
   "displayName": "Apple Platform Build",
-  "version": "0.1.0",
-  "description": "Build, test, and inspect iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running.",
+  "version": "0.2.0",
+  "description": "Build, test, and inspect iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running. Includes the apvt skill, which finds layout mistakes in an app running in the iOS Simulator.",
   "author": {
     "name": "k-ymmt"
   },
   "license": "MIT",
-  "keywords": ["xcode", "ios", "macos", "swift", "xcodebuild", "mcp", "apple"],
+  "keywords": [
+    "xcode",
+    "ios",
+    "macos",
+    "swift",
+    "xcodebuild",
+    "mcp",
+    "apple",
+    "apvt",
+    "layout",
+    "simulator"
+  ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"
 }
