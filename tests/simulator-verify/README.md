@@ -242,6 +242,35 @@ apvt teardown --device <udid>                                 # on any of the us
 Remove the test apps' DerivedData only after checking that its `info.plist` `WorkspacePath`
 points into the scratchpad.
 
+## 8. Comparison with a no-skill baseline
+
+To measure what the skill adds, run each app twice in parallel: once with the black-box prompt
+above (skill + apvt), once with a baseline prompt that drops the skill and apvt. The baseline gets
+the same xmcp line, budget and report format, plus: "use the Xcode MCP tools, Xcode's own
+command-line tools (xcrun simctl, xcodebuild, log) and standard shell utilities; do NOT use apvt
+or any other third-party UI inspection tool, and do NOT read anything under this repository except
+the xmcp script". Copy each app into `apps/A/<App>` and `apps/B/<App>` so the two runs open
+different Xcode workspaces, and use four simulators (Verify A1, A2, B1, B2); run `apvt setup` on
+the A ones only. Booting four new simulators at once made `apvt setup` time out once; rerun it.
+
+Last run (2026-10-08, same environment as above, 8 agents):
+
+| App | Skill + apvt | Baseline (Xcode MCP only) |
+|---|---|---|
+| TodoApp (6) | 6 (bug 6 as a small-target observation) | 5 (missed bug 6) |
+| LoginApp (3) | 3 | 2 (missed the 7-character password) |
+| CountriesUIKit (4) | 4 | 3 (missed the broken constraint) |
+| ShopApp (4) | 4 | 3 (saw Item 20 add Item 19 but dismissed it as its own mistake); also found the unplanted quantity-past-9 bug |
+| Total (17) | 17 | 13 |
+| Wall time | 14, 20, 5, 8 min | 33, 32, 6, 9 min |
+| Agent tool calls | 36, 39, 28, 33 | 59, 66, 37, 54 |
+
+What the baseline lacked: the Synthesize command syntax (the TodoApp and LoginApp agents sent
+about 2,100 and 850 brute-force probes; one probe storm broke the session with "Target device has
+invalid screen scale"), text entry (they tapped keyboard keys, so TodoApp could test only
+U+3000 instead of ASCII spaces), layout checks (no tool finds a constraint conflict that never
+reaches the console), and the first/middle/last-row and boundary-value habits.
+
 ## Known traps while testing
 
 - The first `DeviceInteractionInstallAndRun` once hung for more than 10 minutes because the
