@@ -1,6 +1,6 @@
 # apvt command reference
 
-Condensed from `apvt --help`, `apvt <command> --help`, and the README of https://github.com/k-ymmt/apvt (apvt 0.1.0). When a detail matters, `apvt <command> --help` is authoritative for the installed version.
+Condensed from `apvt --help`, `apvt <command> --help`, and the README of https://github.com/k-ymmt/apvt (apvt 0.1.0, plus `type` and `launch-env` from the next release). When a detail matters, `apvt <command> --help` is authoritative for the installed version.
 
 ## Commands
 
@@ -15,6 +15,8 @@ Condensed from `apvt --help`, `apvt <command> --help`, and the README of https:/
 | `apvt assert <selector> [checks]` | Checks every matching node; exit 1 when any check fails. With no checks, asserts existence. |
 | `apvt screenshot <file.png>` | PNG with issues outlined and labelled `@N` (red: error, orange: warning, dashed: the other nodes an issue involves). |
 | `apvt rules` | What `inspect` checks and how to fix each. |
+| `apvt type <text> [--replace] [--submit]` | Inserts text into the text input that has keyboard focus, through `UIKeyInput` as the keyboard does (SwiftUI bindings and delegates see it). `--replace` clears the field first, `--submit` presses Return. Prints the field and its value. Tap the field first. Takes `--device`, `--app`, `--wait`, `--json`. |
+| `apvt launch-env [--device D] [--shell]` | Prints, as JSON (or `KEY=value` lines with `--shell`), the environment that makes an app launched by Xcode load the agent: pass it as `environmentVariables` of Xcode MCP's `DeviceInteractionInstallAndRun` with `"$(inherited)": ""`, or put it in the scheme's Run environment. Builds the agent if needed; leaves launchd alone. |
 | `apvt debug swiftui-raw <file.json>` / `apvt debug methods <Class>` | Diagnostics for apvt itself; not needed for layout work. |
 
 ## Options shared by inspect, tree, query, assert, screenshot
@@ -94,9 +96,9 @@ Not checked: contrast and color. Conflicts inside UIKit's own views (alerts, the
 
 Errors print `error:` / `why:` / `fix:` lines with the command that fixes the situation; run that command rather than retrying.
 
-## Why Xcode's Run does not work
+## Why Xcode's Run needs launch-env
 
-`apvt setup` sets `DYLD_INSERT_LIBRARIES` in the simulator's launchd. Xcode's Run passes its own `DYLD_INSERT_LIBRARIES` (the Main Thread Checker), which replaces launchd's value, and Xcode re-imports any debugger breakpoint without its commands, so loading the agent through the debugger was dropped. Build or Run from Xcode, stop, then relaunch with `xcrun simctl launch <udid> <bundle-id>`; the installed build then starts with the agent. SwiftUI frames are only available when the agent is in before the first view graph is built, which is why relaunching, not attaching, is required.
+`apvt setup` sets `DYLD_INSERT_LIBRARIES` in the simulator's launchd. Xcode's Run passes its own `DYLD_INSERT_LIBRARIES` (the Main Thread Checker), which replaces launchd's value, and Xcode re-imports any debugger breakpoint without its commands, so loading the agent through the debugger was dropped. Either pass `apvt launch-env`'s variables to Xcode's launch (they put the agent itself into `DYLD_INSERT_LIBRARIES` for that launch), or stop and relaunch with `xcrun simctl launch <udid> <bundle-id>`; the installed build then starts with the agent. SwiftUI frames are only available when the agent is in before the first view graph is built, which is why relaunching, not attaching, is required.
 
 ## Sample app
 

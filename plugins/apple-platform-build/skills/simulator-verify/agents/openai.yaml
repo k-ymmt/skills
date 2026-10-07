@@ -1,0 +1,6 @@
+interface:
+  display_name: "Simulator Verify"
+  short_description: "Drive an iOS Simulator app to verify features, crashes, logs and layout"
+  default_prompt: "Use $simulator-verify to check that the feature I just changed works in the iOS Simulator, and report each step with evidence."
+policy:
+  allow_implicit_invocation: true

@@ -17,6 +17,12 @@ General-purpose skills bundled as one plugin. Install it once and every skill be
 
 Builds, tests, and inspects Apple platform projects through Xcode's MCP server (`xcrun mcpbridge`), with an `xcodebuild` fallback.
 
+| Skill | What it does |
+| --- | --- |
+| `apple-platform-build` | Builds, runs tests, renders previews and reads build errors through Xcode. |
+| `simulator-verify` | Verifies an app in the iOS Simulator: drives its flows with Xcode's device interaction tools, catches crashes and console errors, and checks each screen's layout with apvt. |
+| `apvt` | Finds layout mistakes (truncation, overlap, off-screen, unsafe area, tap targets) in a running simulator app with [apvt](https://github.com/k-ymmt/apvt). |
+
 ## Install
 
 ### Claude Code

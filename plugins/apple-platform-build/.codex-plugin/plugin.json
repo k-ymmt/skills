@@ -1,7 +1,7 @@
 {
   "name": "apple-platform-build",
-  "version": "0.2.0",
-  "description": "Build, test, and inspect iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running. Includes the apvt skill, which finds layout mistakes in an app running in the iOS Simulator.",
+  "version": "0.3.0",
+  "description": "Build, test, and verify iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running. Includes simulator-verify, which drives an app in the iOS Simulator to check flows, crashes, logs and layout, and the apvt skill, which finds layout mistakes in a running simulator app.",
   "author": {
     "name": "k-ymmt"
   },
@@ -31,7 +31,7 @@
     ],
     "defaultPrompt": [
       "Build the current Xcode project and fix any errors",
-      "Run the unit tests for this app and report failures",
+      "Verify the feature I just changed in the iOS Simulator",
       "Inspect the current simulator screen with apvt and fix the layout issues"
     ]
   }
