@@ -47,12 +47,12 @@ changes now merged into its main (`type`, `launch-env`), Claude Code 2.1.288.
 
 ## apvt
 
-- [ ] `apvt launch-env --compact` (one-line JSON) for calls made through a shell wrapper; the
-  skill gives a python one-liner meanwhile.
+- [x] `apvt launch-env --compact` (one-line JSON) for calls made through a shell wrapper; shipped
+  in apvt 0.2.0. The skill still gives a python one-liner: replace it with `--compact`.
 
-- [ ] Release `apvt type`, `apvt launch-env [--xcode]` and the overlap/identifier fixes (merged
-  into main of ~/Projects/swift/apvt, not pushed) and update the Homebrew tap; the skills need
-  apvt newer than 0.1.0.
+- [x] Release `apvt type`, `apvt launch-env [--xcode]` and the overlap/identifier fixes and update
+  the Homebrew tap: apvt 0.2.0 (2026-10-08), `brew install k-ymmt/tap/apvt` now gives it. The
+  skills still say "newer than 0.1.0" and describe the next release: update them to 0.2.0.
 - [x] `apvt status` reported "loaded by launchd" for an agent loaded through launch environment
   variables; the loader now keeps `APVT_LOADED_BY=env`.
 
