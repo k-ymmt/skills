@@ -6,6 +6,11 @@ Observed while testing this skill on Xcode 27.1 beta with iOS 27 simulators.
 
 - **`XcodeOpenWorkspace` with a wrong key** answers "can't be put in front of the user for
   approval. Retry it with a plain absolute path." The key is `path`.
+- **Slow first calls**: after Xcode or a simulator starts, `XcodeListWorkspaces`,
+  `XcodeOpenWorkspace` and the first `DeviceInteractionInstallAndRun` have taken 90–120 s each
+  (four simulators were booting at the time); later calls take seconds. Give them a time limit of
+  at least 240 s (`perl -e 'alarm shift; exec @ARGV' 240 <command>` from a shell; macOS has no
+  `timeout`) and wait, instead of retrying or starting a second session.
 - **`workspaceIdentifier is required`**: pass it to every Xcode tool, even with one workspace open.
 - **Shared workspaces**: when two agents use the same project, `GetConsoleOutput` returns that
   workspace's latest launch. Check the PID in its `launchSessionInfo` against your
@@ -59,7 +64,9 @@ come from the simulator or the capture machinery, not from the app:
 - `Failed to send CA Event for app launch measurements`
 - `[AXValidations] AX Safe category class '…' was not found!`
 - `Class … is implemented in both …` (stdout)
-- `[hapi] CHHapticPattern … hapticpatternlibrary.plist` (keyboard haptics, many per launch)
+- `[hapi] CHHapticPattern … hapticpatternlibrary.plist` and `Failed to read pattern library
+  data` (keyboard haptics, many per launch; the latter matches `fail`)
+- `Connection from client with pid … was invalidated` (matches `invalid`)
 - Lines caused by captures: `Replying to query`, `found matching snapshots`, `(error: (null))`
 
 The app's own lines carry its subsystem's category (for example `[shop]`), or come on stdout
