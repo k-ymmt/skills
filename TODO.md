@@ -2,8 +2,8 @@
 
 Open issues and missing features found while building and testing the `simulator-verify` skill
 (apple-platform-build plugin), which combines the Xcode MCP server (`xcrun mcpbridge`) with apvt.
-Environment of the findings: Xcode 27.1 beta (27A9269), iOS 27.0 simulators, apvt 0.1.0 plus the unreleased
-changes now merged into its main (`type`, `launch-env`), Claude Code 2.1.288.
+Environment of the findings: Xcode 27.1 beta (27A9269), iOS 27.0 simulators, apvt 0.2.0 (tested before its
+release as main with `type` and `launch-env`), Claude Code 2.1.288.
 
 ## Xcode MCP (`xcrun mcpbridge`)
 
@@ -48,11 +48,11 @@ changes now merged into its main (`type`, `launch-env`), Claude Code 2.1.288.
 ## apvt
 
 - [x] `apvt launch-env --compact` (one-line JSON) for calls made through a shell wrapper; shipped
-  in apvt 0.2.0. The skill still gives a python one-liner: replace it with `--compact`.
+  in apvt 0.2.0 and used by the skill.
 
 - [x] Release `apvt type`, `apvt launch-env [--xcode]` and the overlap/identifier fixes and update
-  the Homebrew tap: apvt 0.2.0 (2026-10-08), `brew install k-ymmt/tap/apvt` now gives it. The
-  skills still say "newer than 0.1.0" and describe the next release: update them to 0.2.0.
+  the Homebrew tap: apvt 0.2.0 (2026-10-08), `brew install k-ymmt/tap/apvt` now gives it; the
+  skills require 0.2.0.
 - [x] `apvt status` reported "loaded by launchd" for an agent loaded through launch environment
   variables; the loader now keeps `APVT_LOADED_BY=env`.
 

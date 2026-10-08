@@ -33,7 +33,7 @@ If the line above still reads `$ARGUMENTS` literally, the task is the text the u
      xcrun simctl terminate booted <bundle-id>; xcrun simctl launch booted <bundle-id>
      ```
 
-   `apvt status` shows which apps carry the agent (`loaded by launchd` or `loaded by env`) and prints the relaunch command for every app running without it. The bundle id is `PRODUCT_BUNDLE_IDENTIFIER` in the target's build settings, or in `xcrun simctl listapps booted`. `launch-env` and `type` need apvt newer than 0.1.0; with 0.1.0 use the simctl relaunch.
+   `apvt status` shows which apps carry the agent (`loaded by launchd` or `loaded by env`) and prints the relaunch command for every app running without it. The bundle id is `PRODUCT_BUNDLE_IDENTIFIER` in the target's build settings, or in `xcrun simctl listapps booted`. `launch-env` and `type` need apvt 0.2.0 or newer (`brew upgrade apvt`); with 0.1.0 use the simctl relaunch.
 3. **Reach the screen.** Launch arguments (`xcrun simctl launch booted <bundle-id> -screen profile`), a deep link (`xcrun simctl openurl booted <url>`), or the simulator interaction tools you already have. To fill a text field, tap it and run `apvt type "text"` (`--replace`, `--submit` for Return). Only the foreground app answers; iOS suspends the others.
 4. **Inspect.** Right after a launch, add `--wait 10`:
 

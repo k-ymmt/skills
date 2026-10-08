@@ -22,7 +22,7 @@ Observed while testing this skill on Xcode 27.1 beta with iOS 27 simulators.
   `xcrun simctl install <udid> <App.app>` never returns, the simulator is wedged. Reboot it
   (`xcrun simctl shutdown <udid>; xcrun simctl boot <udid>`), run `apvt setup` again, and start a
   new session.
-- **Older apvt without `launch-env`**: launch with `DeviceInteractionInstallAndRun`, then relaunch
+- **apvt older than 0.2.0 (no `launch-env`, no `type`)**: ask for `brew upgrade apvt`. Meanwhile launch with `DeviceInteractionInstallAndRun`, then relaunch
   with `xcrun simctl terminate <udid> <bundle-id>; xcrun simctl launch <udid> <bundle-id>`. That
   launch has the agent but no `GetConsoleOutput`; read logs with
   `xcrun simctl spawn <udid> log show --last 5m --predicate 'process == "<App>"'`.

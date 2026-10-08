@@ -13,10 +13,10 @@ found, plus one unplanted bug; one fix-and-reverify run fixed every bug of TodoF
 
 - Xcode running with **Settings > Intelligence > Model Context Protocol > Xcode Tools** on.
 - `xcodegen` on PATH.
-- apvt with `type` and `launch-env --xcode`. Until a release has them, build it from
-  `~/Projects/swift/apvt` (main): `swift build`, then use `~/Projects/swift/apvt/.build/debug/apvt`.
-  Put that binary first on PATH for the subagents, for example by symlinking it as
-  `<scratchpad>/bin/apvt`.
+- apvt 0.2.0 or newer (`brew install k-ymmt/tap/apvt`); it has `type` and `launch-env --xcode`.
+  To test unreleased apvt changes, build `~/Projects/swift/apvt` with `swift build` and put
+  `~/Projects/swift/apvt/.build/debug/apvt` first on PATH for the subagents, for example by
+  symlinking it as `<scratchpad>/bin/apvt`.
 - Work in the session's scratchpad directory: apps, reports, answer keys. Nothing of it belongs in
   this repository.
 
