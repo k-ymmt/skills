@@ -1,8 +1,8 @@
 {
   "name": "general",
   "displayName": "General",
-  "version": "0.2.0",
-  "description": "k-ymmt's general-purpose skills: ask-until-clear (carry out a task while asking about every unclear point) and codex-adversarial-review (adversarial second-opinion code review via OpenAI Codex). Every skill is user-invoked only.",
+  "version": "0.3.0",
+  "description": "k-ymmt's general-purpose skills: ask-until-clear (carry out a task while asking about every unclear point) and codex-adversarial-review (adversarial second-opinion code review via OpenAI Codex, run at the end of a work session). ask-until-clear is user-invoked only.",
   "author": {
     "name": "k-ymmt"
   },

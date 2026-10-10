@@ -1,7 +1,6 @@
 ---
 name: codex-adversarial-review
-description: Run an adversarial second-opinion review of the current code changes with OpenAI Codex (codex exec in a fresh read-only session), then verify every finding against the code before reporting it. Only the user can start this skill; it never runs on its own.
-disable-model-invocation: true
+description: Run an adversarial second-opinion review of the current code changes with OpenAI Codex (codex exec in a fresh read-only session), then verify every finding against the code before reporting it. Use it at the end of a work session, once the code changes are complete and before they are committed, and whenever the user asks for a second opinion on a diff. Requires the Codex CLI, logged in.
 argument-hint: "[base-ref | a..b | commit | focus text]"
 allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/run_review.sh *) Bash(git diff *) Bash(git status *) Bash(git log *) Bash(git show *)
 metadata:
@@ -27,6 +26,10 @@ If the line above still reads `$ARGUMENTS` literally, the scope is whatever the 
 | anything else (for example "the retry logic", "auth changes") | `--focus "<text>"`, scope stays auto |
 
 Combinations are fine: `main the migration` becomes `--base main --focus "the migration"`.
+
+## When to run it
+
+Run this at the end of a work session, after the code changes are complete and before committing them, as a last check that nothing shipped broken. Use the auto scope then: the script reviews the uncommitted changes, or the branch's commits if the tree is clean. Skip it when the session produced no code changes (documentation or configuration only) and say so instead. The user can also start it at any time with an explicit scope.
 
 ## Why a second model, and why adversarial
 

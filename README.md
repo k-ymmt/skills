@@ -11,7 +11,7 @@ General-purpose skills bundled as one plugin. Install it once and every skill be
 | Skill | Invoke | What it does |
 | --- | --- | --- |
 | `ask-until-clear` | `/ask-until-clear <task>` (Claude Code) / `$ask-until-clear <task>` (Codex) | Carries out the task, but asks you about every unclear or ambiguous point first and keeps asking until nothing is left to guess. Only you can start it; the model never selects it on its own. |
-| `codex-adversarial-review` | `/codex-adversarial-review [ref\|range\|commit\|focus]` (Claude Code) / `$codex-adversarial-review ...` (Codex) | Runs an adversarial review of your changes in a fresh read-only `codex exec` session, then verifies every finding against the code before reporting. Requires the Codex CLI, logged in. Only you can start it. |
+| `codex-adversarial-review` | `/codex-adversarial-review [ref\|range\|commit\|focus]` (Claude Code) / `$codex-adversarial-review ...` (Codex) | Runs an adversarial review of your changes in a fresh read-only `codex exec` session, then verifies every finding against the code before reporting. Requires the Codex CLI, logged in. You can start it at any time, and the model also runs it on its own at the end of a work session, before committing. |
 
 ### `apple-platform-build`
 
