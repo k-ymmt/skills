@@ -31,6 +31,8 @@ Combinations are fine: `main the migration` becomes `--base main --focus "the mi
 
 Run this at the end of a work session, after the code changes are complete and before committing them, as a last check that nothing shipped broken. Use the auto scope then: the script reviews the uncommitted changes, or the branch's commits if the tree is clean. Skip it when the session produced no code changes (documentation or configuration only) and say so instead. The user can also start it at any time with an explicit scope.
 
+When the `wrap-up` skill from the same plugin closes the session, it runs this review as its first step; do not run it a second time after that.
+
 ## Why a second model, and why adversarial
 
 A reviewer who wrote or watched the code being written shares its blind spots. The Codex session started by this skill has no conversation history, is told to assume the change is broken, and must back every claim with a file, a line, and a failure scenario. That setup deliberately produces false positives alongside real bugs. The value of the exercise comes from step 3, where you check each claim against the code instead of forwarding it.
