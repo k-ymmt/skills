@@ -1,6 +1,6 @@
 {
   "name": "apple-platform-build",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Build, test, and verify iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running. Includes simulator-verify, which drives an app in the iOS Simulator to check flows, crashes, logs and layout, and the apvt skill, which finds layout mistakes in a running simulator app.",
   "author": {
     "name": "k-ymmt"

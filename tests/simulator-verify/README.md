@@ -202,7 +202,7 @@ Environment specifics (they only tell you how to reach the tools):
 - The Xcode MCP tools are reachable from the shell: `<repo>/tests/simulator-verify/xmcp call <ToolName> '<json arguments>'`,
   exactly an MCP tool call to the `xcode` server (same names and arguments), printing the tool's
   text result; exit code 1 = tool error. Never run `xmcp serve` or `xmcp stop`.
-- apvt: `<scratchpad>/bin/apvt` (development build with `type` and `launch-env`).
+- apvt: on PATH, 0.2.0 or newer (or `<scratchpad>/bin/apvt` when testing an unreleased build).
 - Use ONLY simulator "<Verify A>", UDID <udid> (booted, apvt setup done). Do not touch other
   simulators. Another agent works on another simulator; do not end sessions you did not start.
 - Project: <scratchpad>/apps/<App>/<App>.xcodeproj (scheme <App>). Spec: <scratchpad>/apps/<App>/SPEC.md.

@@ -3,7 +3,7 @@ name: simulator-verify
 description: Verify that an iOS app really works by driving it in the iOS Simulator - build and launch it through the Xcode MCP server, tap, swipe and type through its flows, check each result in the live UI hierarchy, catch crashes and console errors, and check every screen's layout with apvt. Use after implementing or fixing a feature, when asked to test, QA, smoke-test or "check that it works" on the simulator, to reproduce a reported bug, or to walk through a spec or acceptance criteria. Not for unit tests alone (use apple-platform-build), physical devices, or macOS apps.
 argument-hint: "[what to verify, e.g. 'the sign-in flow against SPEC.md' or 'adding and deleting todos']"
 metadata:
-  short-description: Drive an iOS Simulator app to verify features, crashes, logs and layout
+  short-description: Drive a Simulator app to verify flows, crashes, logs and layout
 ---
 
 # Simulator verify: prove the app works, screen by screen
