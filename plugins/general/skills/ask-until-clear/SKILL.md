@@ -32,4 +32,5 @@ The user chose this skill because they would rather answer many questions than r
 - Ask in the language the user is writing in.
 - Number the questions and make each one concrete and answerable. One topic per question.
 - Where you have a leaning, show your current interpretation so the user can simply confirm or correct it, but never present it as decided.
+- Put the recommended answer first. When a question offers choices and you favour one, list that choice at the top and mark it as recommended (for example a `(Recommended)` suffix on its label), so the user can accept the default in one move and spend their attention on the questions where they disagree. If you have no preference, say so rather than inventing one.
 - Use an interactive question tool when one is available (for example AskUserQuestion in Claude Code). Otherwise ask in chat and wait for the reply before doing anything else.

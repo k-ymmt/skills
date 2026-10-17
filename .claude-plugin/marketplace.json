@@ -11,7 +11,7 @@
       "name": "general",
       "source": "./plugins/general",
       "description": "k-ymmt's general-purpose skills: ask-until-clear (do the task, asking about every unclear point), codex-adversarial-review (adversarial second-opinion review via codex exec) and wrap-up (close a work session: Codex review, then remove finished tasks from TODO.md and record leftovers). ask-until-clear is user-invoked only.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "category": "workflow",
       "tags": [
         "questions",
