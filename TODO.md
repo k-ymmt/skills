@@ -85,5 +85,6 @@ release as main with `type` and `launch-env`), Claude Code 2.1.288.
 - [ ] `wrap-up` (general plugin) has only passed `scripts/validate.sh`; a behavioral check
   (`claude --plugin-dir ./plugins/general -p "/wrap-up"`, and `$wrap-up` in Codex) could not run
   because the nested `claude -p` failed with "OAuth session expired". Run it after re-login and
-  confirm that step 1 really invokes `codex-adversarial-review` once and that TODO.md edits keep
+  confirm that step 1 really invokes `codex-adversarial-review` once, that it fixes CONFIRMED
+  findings and only reports PLAUSIBLE ones (added in general 0.4.2), and that TODO.md edits keep
   the file's conventions.

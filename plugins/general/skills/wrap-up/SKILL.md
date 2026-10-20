@@ -1,10 +1,10 @@
 ---
 name: wrap-up
-description: Close a work session in three steps - run the codex-adversarial-review skill on the session's code changes and verify its findings, remove from TODO.md the tasks this session finished, and record in TODO.md anything left undone or deferred. Use it when the work the user asked for is complete and before the session's final commit, and whenever the user asks to wrap up, finish up, or close out the session.
+description: Close a work session in three steps - run the codex-adversarial-review skill on the session's code changes, verify its findings and fix the confirmed ones, remove from TODO.md the tasks this session finished, and record in TODO.md anything left undone or deferred. Use it when the work the user asked for is complete and before the session's final commit, and whenever the user asks to wrap up, finish up, or close out the session.
 argument-hint: "[notes for the wrap-up]"
 allowed-tools: Bash(git status *) Bash(git diff *) Bash(git log *) Bash(git show *)
 metadata:
-  short-description: Review the changes, then settle TODO.md
+  short-description: Review and fix the changes, then settle TODO.md
 ---
 
 # Wrap Up
@@ -19,13 +19,17 @@ If the line above still reads `$ARGUMENTS` literally, the notes are whatever the
 
 ## Why these three steps, in this order
 
-A session ends with two kinds of loose ends. Mistakes nobody caught, because the author reviewed their own work; and tasks that were finished, half-finished or deliberately deferred but exist only in the conversation. An independent reviewer catches the first kind. The second kind survives only if TODO.md is edited now, while the session is still in context. Review first, so that findings you decide not to fix can be written down as leftovers.
+A session ends with two kinds of loose ends. Mistakes nobody caught, because the author reviewed their own work; and tasks that were finished, half-finished or deliberately deferred but exist only in the conversation. An independent reviewer catches the first kind. The second kind survives only if TODO.md is edited now, while the session is still in context. Review first, so that confirmed findings are fixed while the session's context is still loaded, and the ones that cannot be fixed now can be written down as leftovers.
 
 ## Step 1: adversarial review
 
 Run the `codex-adversarial-review` skill, which ships in the same plugin as this one. In Claude Code invoke it through the Skill tool. In Codex, or wherever there is no skill tool, read `../codex-adversarial-review/SKILL.md` next to this file and follow it. Use its auto scope unless the user's notes name one. Follow that skill to the end: run Codex, verify every finding against the code, report the verdicts. If the session produced no code changes (documentation or configuration only), skip the review and say so.
 
-Confirmed findings are the user's to decide on. Fix one only when the user asks; otherwise it becomes a leftover for step 3.
+Then act on each verdict. This replaces the review skill's "do not fix anything" rule for this run:
+
+- **CONFIRMED**: fix it now. A confirmed finding is a bug you have already traced through the code, and the session that wrote the code is the cheapest place to fix it. Keep the fix to what the finding needs. Afterwards trace the failure scenario through the changed code again, and run the tests that cover it if the project has any, so the fix is checked before the session ends. Do not fix it when the fix needs a decision only the user can make (changing intended behavior, a large redesign, work outside the session's scope) or after three failed attempts at the same finding; report it instead and make it a leftover for step 3.
+- **PLAUSIBLE**: do not fix it. Nobody has shown that the bug is real, so a change could break working code. Report it to the user with file and line, the failure scenario, and what would settle it (the runtime data, environment or system you could not inspect), and let the user decide.
+- **REJECTED**: report it briefly with the reason, as the review skill says.
 
 ## Step 2: remove finished tasks from TODO.md
 
@@ -42,7 +46,7 @@ Read the whole file. Then go through the session's work: what the user asked for
 Collect everything from this session that is not done:
 
 - work the user asked for that was skipped, scaled down or deferred, and why
-- problems found but not fixed, including step 1 findings that were not fixed
+- problems found but not fixed, including confirmed step 1 findings that were left unfixed (plausible findings are only reported, unless the user asks to record them)
 - follow-ups you promised or proposed during the session
 - anything the user's notes say to remember
 
@@ -52,4 +56,4 @@ If nothing is left, say so and leave the file alone.
 
 ## Report
 
-Tell the user briefly: the review's verdicts, or that it was skipped and why; the tasks removed from TODO.md; the items added. This skill does not run tests or commit. Whatever the project's end-of-session rules say about those happens after it.
+Tell the user briefly: the confirmed findings and how each was fixed, or why it was left; the plausible findings for the user to judge; the rejected claims; or that the review was skipped and why. Then the tasks removed from TODO.md and the items added. Apart from the tests that check a fix, this skill does not run the test suite or commit. Whatever the project's end-of-session rules say about those happens after it.

@@ -48,7 +48,7 @@ A reviewer who wrote or watched the code being written shares its blind spots. T
    - REJECTED: the claim is wrong, and you can say why in one sentence.
    Low confidence is not a reason to skip verification, and a convincing write-up is not a reason to skip it either.
 4. **Report to the user.** Lead with confirmed findings ordered by severity, then plausible ones, each with file and line, the scenario, and your verdict. List rejected claims briefly with the reason, so the user can see what was considered. If there were no findings, say what Codex covered according to `reviewed` so the user can judge the depth. Keep the raw JSON path in the report for reference.
-5. **Do not fix anything** unless the user asks. The deliverable of this skill is the verified assessment.
+5. **Do not fix anything** unless the user asks. The deliverable of this skill is the verified assessment. When the `wrap-up` skill runs this review, its step 1 says which verdicts to fix; follow that instead.
 
 ## Script reference
 

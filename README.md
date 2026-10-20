@@ -12,7 +12,7 @@ General-purpose skills bundled as one plugin. Install it once and every skill be
 | --- | --- | --- |
 | `ask-until-clear` | `/ask-until-clear <task>` (Claude Code) / `$ask-until-clear <task>` (Codex) | Carries out the task, but asks you about every unclear or ambiguous point first and keeps asking until nothing is left to guess. Only you can start it; the model never selects it on its own. |
 | `codex-adversarial-review` | `/codex-adversarial-review [ref\|range\|commit\|focus]` (Claude Code) / `$codex-adversarial-review ...` (Codex) | Runs an adversarial review of your changes in a fresh read-only `codex exec` session, then verifies every finding against the code before reporting. Requires the Codex CLI, logged in. You can start it at any time, and the model also runs it on its own at the end of a work session, before committing. |
-| `wrap-up` | `/wrap-up [notes]` (Claude Code) / `$wrap-up [notes]` (Codex) | Closes a work session: runs `codex-adversarial-review` on the session's changes, removes the tasks the session finished from `TODO.md`, and records anything left undone or deferred there. The model runs it on its own when the requested work is complete, before the final commit; you can also start it yourself. |
+| `wrap-up` | `/wrap-up [notes]` (Claude Code) / `$wrap-up [notes]` (Codex) | Closes a work session: runs `codex-adversarial-review` on the session's changes, fixes the confirmed findings and reports the plausible ones, removes the tasks the session finished from `TODO.md`, and records anything left undone or deferred there. The model runs it on its own when the requested work is complete, before the final commit; you can also start it yourself. |
 
 ### `apple-platform-build`
 
