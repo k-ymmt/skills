@@ -27,8 +27,8 @@
     {
       "name": "apple-platform-build",
       "source": "./plugins/apple-platform-build",
-      "description": "Build, test, and verify iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running. Includes simulator-verify, which drives an app in the iOS Simulator to check flows, crashes, logs and layout, and the apvt skill, which finds layout mistakes in a running simulator app.",
-      "version": "0.3.2",
+      "description": "Build, test, and verify iOS/macOS/watchOS/tvOS/visionOS projects through Xcode's own MCP server (xcrun mcpbridge), falling back to xcodebuild when Xcode is not running. Includes simulator-verify, which drives an app in the iOS Simulator to check flows, crashes, logs and layout, the apvt skill, which finds layout mistakes in a running simulator app, and iphone-duo, which folds, unfolds, rotates and screenshots the foldable iPhone Duo simulator.",
+      "version": "0.4.0",
       "category": "development",
       "tags": [
         "xcode",
@@ -38,7 +38,9 @@
         "mcp",
         "apvt",
         "layout",
-        "simulator"
+        "simulator",
+        "foldable",
+        "iphone-duo"
       ]
     }
   ]

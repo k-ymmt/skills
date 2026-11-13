@@ -38,4 +38,5 @@ tests/<skill>/                    How a skill was tested end to end, and helpers
 - Run `scripts/validate.sh` before committing. It checks manifest consistency, runs `claude plugin validate --strict`, and loads the marketplace into an isolated Codex home.
 - Test a plugin in Claude Code without installing: `claude --plugin-dir ./plugins/<name>`.
 - Re-test `simulator-verify` with sample apps and subagents as described in `tests/simulator-verify/README.md`.
+- Re-check `iphone-duo` on a booted iPhone Duo simulator as described in `tests/iphone-duo/README.md` (after an Xcode update too: its scripts depend on Device Hub's accessibility labels and `simctl`'s screen names).
 - Commit at the end of every work session with the original task context in the message.

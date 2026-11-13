@@ -1,0 +1,6 @@
+interface:
+  display_name: "iPhone Duo Simulator"
+  short_description: "Fold, rotate and screenshot the iPhone Duo simulator"
+  default_prompt: "Use $iphone-duo to open the iPhone Duo simulator, take a screenshot of my app, then fold it and take another."
+policy:
+  allow_implicit_invocation: true

@@ -23,6 +23,7 @@ Builds, tests, and inspects Apple platform projects through Xcode's MCP server (
 | `apple-platform-build` | Builds, runs tests, renders previews and reads build errors through Xcode. |
 | `simulator-verify` | Verifies an app in the iOS Simulator: drives its flows with Xcode's device interaction tools, catches crashes and console errors, and checks each screen's layout with apvt. |
 | `apvt` | Finds layout mistakes (truncation, overlap, off-screen, unsafe area, tap targets) in a running simulator app with [apvt](https://github.com/k-ymmt/apvt). |
+| `iphone-duo` | Folds, unfolds, half-opens and rotates the foldable iPhone Duo simulator from the shell (Device Hub's buttons through the Accessibility API) and screenshots whichever of its two screens is lit; records the Duo's sizes, safe areas and UI-test traps. |
 
 ## Install
 
